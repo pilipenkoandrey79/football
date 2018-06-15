@@ -64,7 +64,7 @@ class Heroes extends Controller
      * @param  \App\Hero  $hero
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hero $hero)
+    public function delete(Hero $hero)
     {
         $hero = Hero::find($hero->id);
         $hero->delete();
