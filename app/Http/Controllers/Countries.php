@@ -7,9 +7,6 @@ use Illuminate\Http\Request;
 
 class Countries extends Controller
 {
-    private $rules = [
-        'name' => 'required|regex:^[^0-9!#.$]$'
-    ];
     /**
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -26,10 +23,9 @@ class Countries extends Controller
      */
     public function store(Request $request)
     {
-        $validData = $request->validate($this->rules);
         $country = new Country();
-        $country->id = $validData->input('id');
-        $country->name = $validData->input('name');
+        $country->id = $request->input('id');
+        $country->name = $request->input('name');
         $country->save();
 
         return response()->json($country, 201);
@@ -55,12 +51,11 @@ class Countries extends Controller
      */
     public function update(Request $request, Country $country)
     {
-        $validData = $request->validate($this->rules);
-        $model = Country::find($country->id);
-        $model->name = $validData->input('name');
-        $model->save();
+        $country = Country::find($country->id);
+        $country->name = $request->input('name');
+        $country->save();
 
-        return response()->json($model, 200);
+        return response()->json($country, 200);
     }
 
     /**
@@ -71,8 +66,8 @@ class Countries extends Controller
      */
     public function delete(Country $country)
     {
-        $model = Country::find($country->id);
-        $model->delete();
+        $country = Country::find($country->id);
+        $country->delete();
 
         return response()->json(null, 204);
     }
