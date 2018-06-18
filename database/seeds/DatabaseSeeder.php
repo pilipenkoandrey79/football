@@ -1,6 +1,5 @@
 <?php
 
-require_once "HeroesSeeder.php";
 require_once "CountriesSeeder.php";
 require_once "TeamsSeeder.php";
 
@@ -15,7 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(HeroesSeeder::class);
         $this->call(CountriesSeeder::class);
         $this->call(TeamsSeeder::class);
     }
