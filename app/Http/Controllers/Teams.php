@@ -16,4 +16,13 @@ class Teams extends Controller
     {
         return Team::where('country_id', $country->id)->get();
     }
+
+    /**
+     * @param \App\Team $team
+     * @return \App\Team
+     */
+    public function show(Team $team)
+    {
+        return $team;
+    }
 }
