@@ -24,7 +24,7 @@ Route::post('v1/logout',                   'Auth\LoginController@logout');
 Route::get('v1/countries',                 'Countries@index');
 Route::get('v1/countries/{country}',       'Countries@show');
 Route::get('v1/countries/{country}/teams', 'Teams@index');
-//Route::get('v1/countries/{country}/teams/{team}', 'Teams@show');
+Route::get('v1/countries/teams/{team}',    'Teams@show');
 
 Route::group(['middleware' => 'auth:api'], function()
 {

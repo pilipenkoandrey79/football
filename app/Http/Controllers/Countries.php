@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class Countries extends Controller
 {
+    /** @var array */
+    protected $rules = ['name' => 'required|string|max:255/'];
+
     /**
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -23,6 +26,7 @@ class Countries extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, $this->rules);
         $country = new Country();
         $country->id = $request->input('id');
         $country->name = $request->input('name');
@@ -51,6 +55,7 @@ class Countries extends Controller
      */
     public function update(Request $request, Country $country)
     {
+        $this->validate($request, $this->rules);
         $country = Country::find($country->id);
         $country->name = $request->input('name');
         $country->save();
