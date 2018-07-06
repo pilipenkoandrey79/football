@@ -14,7 +14,10 @@ class Teams extends Controller
      */
     public function index(Country $country)
     {
-        return Team::where('country_id', $country->id)->get();
+        return Team::join('countries', 'teams.country_id', '=', 'countries.id')
+                    ->where('country_id', $country->id)
+                    ->select('teams.*', 'countries.code')
+                    ->get();
     }
 
     /**
@@ -23,6 +26,9 @@ class Teams extends Controller
      */
     public function show(Team $team)
     {
-        return $team;
+        return Team::join('countries', 'teams.country_id', '=', 'countries.id')
+            ->where('teams.id', $team->id)
+            ->select('teams.*', 'countries.code')
+            ->get();
     }
 }
